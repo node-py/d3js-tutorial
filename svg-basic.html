@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>SVG basic</title>
+<script src="https://d3js.org/d3.v3.js"></script>
+
+</head>
+
+<body>
+
+<svg width="200" height="200">
+  <circle fill="#3E5693" cx="50" cy="120" r="20" />
+  <text x="100" y="100">Hello SVG!</text>
+  <path d="M100,10L150,70L50,70Z" fill="#BEDBC3" stroke="#539E91" stroke-width="3">
+</svg>
+
+<svg height="100" width="250" id="chart">
+</svg>
+
+<svg id="line-chart" height="100" width="200">
+</svg>
+
+<script>
+  const data = [{
+    label: "7am",
+    sales: 20
+  },{
+    label: "8am",
+    sales: 12
+  },{
+    label: "9am",
+    sales: 8
+  },{
+    label: "10am",
+    sales: 27
+  }];
+
+  const g = d3.select('#chart')
+              .selectAll("g")
+              .data(data)
+              .enter()
+              .append("g");
+        g.append("circle")
+          .attr("cy", 40)
+          .attr("cx", (d, i) => (i+1)*50)
+          .attr("r", (d) => d.sales);
+        g.append("text")
+          .attr("y", 90)
+          .attr("x", (d, i) => (i+1)*50)
+          .text((d) => d.label);
+</script>
+
+<script>
+  const line_data=[
+    {x: 0, y: 30},
+    {x: 50, y:20},
+    {x:100, y:40},
+    {x:150, y:80},
+    {x:200, y:95}
+  ];
+
+  const line = d3.svg.line()
+        .x((d) => d.x)
+        .y((d) => 100-d.y)
+        .interpolate("linear");
+
+  d3.select('#line-chart')
+    .append("path")
+    .attr("stroke-width", 2)
+    .attr('d', line(line_data));
+</script>
+
+</body>
+
+</html>

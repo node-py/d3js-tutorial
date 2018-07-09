@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bar Chart Example</title>
+  <script src="https://d3js.org/d3.v3.js"></script>
+  <style>
+
+    #chart div {
+      display: inline-block;
+      background: #4285f4;
+      width: 20px;
+      margin-right: 3px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="chart"></div>
+
+  <script>
+    d3.select('#chart')
+      .selectAll("div")
+      .data([4, 8, 15, 16, 23, 42])
+      .enter()
+      .append("div")
+      .style("height", (d)=> d + "px")
+  </script>
+</body>
+
+</html>
